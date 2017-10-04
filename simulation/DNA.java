@@ -1,6 +1,6 @@
 package simulation;
 
-public abstract class Organism implements Cloneable {
+public abstract class DNA implements Cloneable {
 	
 	public abstract void update();
 	public abstract void mutate();
