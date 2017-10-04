@@ -1,19 +1,8 @@
 package simulation;
 
-public abstract class Organism {
+public abstract class Organism implements Cloneable {
 	
-	private int[] genome;
-	
-	public abstract void update() {
-		
-		//TODO
-		
-	}
-	
-	public abstract void mutate() {
-		
-		//TODO
-		
-	}
+	public abstract void update();
+	public abstract void mutate();
 	
 }
