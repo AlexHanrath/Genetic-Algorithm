@@ -4,26 +4,26 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-public class Population {
+public class Population<T> {
 	
-	private Organism type;
-	private List<Organism> pool = new ArrayList<Organism>();
+	private DNA<T> type;
+	private List<DNA<T>> pool = new ArrayList<Organism>();
 	private Consumer<List<Organism>> onUpdate;
 	
 	private double mutationChange = 0.01;
 	private double selectionPressure = 0.01;
 	
-	public Population(Organism type) {
+	public Population(DNA<T> type, int poolSize) {
 		
 		this.type = type;
 		
-		initPool();
+		initPool(poolSize);
 		
 	}
 	
-	public Population(Organism type, Consumer<List<Organism>> onUpdate) {
+	public Population(DNA<T> type, int poolSize, Consumer<List<DNA<T>>> onUpdate) {
 		
-		this(type);
+		this(type, poolSize);
 		
 		this.onUpdate = onUpdate;
 		
@@ -63,9 +63,13 @@ public class Population {
 		
 	}
 	
-	private void initPool() {
+	private void initPool(int poolSize) {
 		
-		//TODO
+		for (int i = 0; i < size; i++) {
+			
+			pool.add(type.randomClone());
+			
+		}
 		
 	}
 	
