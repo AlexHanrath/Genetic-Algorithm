@@ -10,7 +10,7 @@ public class Population {
 	private List<Organism> pool = new ArrayList<Organism>();
 	private Consumer<List<Organism>> onUpdate;
 	
-	private double mutationChance = 0.01;
+	private double mutationChange = 0.01;
 	private double selectionPressure = 0.01;
 	
 	public Population(Organism type) {
