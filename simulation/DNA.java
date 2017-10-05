@@ -11,14 +11,14 @@ public class DNA implements Cloneable {
 	
 	public void mutate() {
 		
-		int index = Math.round(Math.random()*(genes.length-1));
+		int index = (int) Math.round(Math.random()*(genes.length-1));
 		mutateGene(index);
 		
 	}
 	
 	private void mutateGene(int index) {
 		
-		genes[index] = Math.round(Math.random()*(max-min)/step)*step+min;
+		genes[index] = (int) Math.round(Math.random()*(max-min)/step)*step+min;
 		
 	}
 	
