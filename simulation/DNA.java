@@ -30,14 +30,11 @@ public abstract class DNA implements Cloneable {
 		return copy;
 	}
 	
-	@Override
-	public DNA clone() {
-		DNA copy = new DNA(genes.length);
+	protected void copy(DNA copy) {
 		copy.genes = genes;
 		copy.min = min;
 		copy.max = max;
 		copy.step = step;
-		return copy;
 	}
 	
 	public DNA(int nGenes, double min, double max) {
