@@ -50,7 +50,13 @@ public class Test {
     		Population p = new Population(TextDNA.getFitness, template, size);
 		p.doGenerations(nGenerations);
 		
-		//TODO Output
+		List<DNA> pool = p.getPool();
+		
+		for (DNA dna : pool) {
+			
+			//TODO
+			
+		}
     		
 	}
 	
