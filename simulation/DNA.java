@@ -31,13 +31,6 @@ public abstract class DNA {
 		return copy;
 	}
 	
-	protected void copy(DNA copy) {
-		copy.genes = genes;
-		copy.min = min;
-		copy.max = max;
-		copy.step = step;
-	}
-	
 	public DNA(int nGenes, double min, double max, double step) {
 		
 		this.step = step;
