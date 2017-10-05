@@ -8,6 +8,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.Map.Entry;
 
 public class Population {
 	
@@ -48,7 +49,7 @@ public class Population {
 	
 	private void update() {
 		
-		for (Organism o : pool) {
+		for (DNA o : pool) {
 			
 			o.update();
 			
