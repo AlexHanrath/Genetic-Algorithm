@@ -12,6 +12,18 @@ import java.util.Map.Entry;
 
 public class Population {
 	
+	public static double linearInterpolate(double a, double b, double v) {
+		return a*(1-v)+b*v;
+	}
+	
+	public static double quadraticInterpolate(double a, double b, double v) {
+		return a*(1-v*v)+b*v*v;
+	}
+	
+	public static double squareRootInterpolate(double a, double b, double v) {
+		return a*(1-Math.sqrt(v))+b*Math.sqrt(v);
+	}
+	
 	private DNA type;
 	private List<DNA> pool = new ArrayList<DNA>();
 	
