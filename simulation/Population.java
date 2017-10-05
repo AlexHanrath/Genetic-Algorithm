@@ -27,7 +27,10 @@ public class Population {
 	private DNA type;
 	private List<DNA> pool = new ArrayList<DNA>();
 	
-	private Consumer<List<DNA>> onUpdate;
+	public List<DNA> getPool() {
+		return new ArrayList<DNA>(pool);
+	}
+	
 	private Function<List<DNA>, List<Double>> getFitness;
 	
 	private double mutationRate = 0.01;
