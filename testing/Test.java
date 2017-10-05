@@ -53,9 +53,7 @@ public class Test {
 		List<DNA> pool = p.getPool();
 		
 		for (DNA dna : pool) {
-			
-			//TODO
-			
+			System.out.println(dna.toString());
 		}
     		
 	}
