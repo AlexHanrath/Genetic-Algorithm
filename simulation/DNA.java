@@ -1,6 +1,6 @@
 package simulation;
 
-public abstract class DNA implements Cloneable {
+public abstract class DNA {
 	
 	private double[] genes;
 	private double min;
@@ -8,6 +8,7 @@ public abstract class DNA implements Cloneable {
 	private double step = 1;
 	
 	public abstract void update();
+	public abstract DNA clone();
 	
 	public void mutate() {
 		
@@ -23,7 +24,7 @@ public abstract class DNA implements Cloneable {
 	}
 	
 	public DNA randomClone() {
-		DNA copy = (DNA) clone();
+		DNA copy = clone();
 		for (int i = 0; i < genes.length; i++) {
 			mutateGene(i);
 		}
