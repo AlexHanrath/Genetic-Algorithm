@@ -1,13 +1,18 @@
 package simulation;
 
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
+import java.util.Map.Entry;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Population {
 	
@@ -26,8 +31,10 @@ public class Population {
 	private DNA type;
 	private List<Entry<DNA, Double>> pool = new ArrayList<Entry<DNA, Double>>();
 	
-	public List<DNA> getPool() {
-		return new ArrayList<DNA>(pool);
+	private static Comparator<Entry<DNA, Double>> sortPool = (a, b) -> Double.compare(a.getValue(), b.getValue());
+	
+	public List<Entry<DNA, Double>> getPool() {
+		return new ArrayList<Entry<DNA, Double>>(pool);
 	}
 	
 	private Function<List<DNA>, List<Double>> getFitness;
@@ -63,9 +70,9 @@ public class Population {
 	
 	private void update() {
 		
-		for (DNA o : pool) {
+		for (Entry<DNA, Double> o : pool) {
 			
-			o.update();
+			o.getKey().update();
 			
 		}
 		
@@ -106,21 +113,25 @@ public class Population {
 		
 	}
 	
-	public DNA getBest() {
+	public Entry<DNA, Double> getBest() {
 		
-		
-		
-	}
-	
-	public DNA getWorst() {
-		
-		
+		Collections.sort(pool, sortPool);
+		return pool.get(pool.size()-1);
 		
 	}
 	
-	public DNA getMean() {
+	public Entry<DNA, Double> getWorst() {
 		
+		Collections.sort(pool, sortPool);
+		return pool.get(0);
 		
+	}
+	
+	public Entry<DNA, Double> getMean() {
+		
+		Collections.sort(pool, sortPool);
+		int index = (pool.size()-1)/2;
+		return pool.get((int) index);
 		
 	}
 	
@@ -130,14 +141,14 @@ public class Population {
 			return;
 		}
 		
-		List<Double> fitnesses = getFitness.apply(new ArrayList<DNA>(pool));
+		List<Double> fitnesses = getFitness.apply(pool.parallelStream().map(v -> v.getKey()).collect(Collectors.toList()));
 		List<Entry<DNA, Double>> newPool = new ArrayList<Entry<DNA, Double>>();
 		
 		double average = fitnesses.parallelStream().mapToDouble(v -> v).average().getAsDouble();
 		
 		WeightedSelectionList<Entry<DNA, Double>> l = new WeightedSelectionList<Entry<DNA, Double>>();
 		for (int i = 0; i < pool.size(); i++) {
-			l.add(new SimpleEntry<DNA, Double>(pool.get(i), linearInterpolate(average, fitnesses.get(i), selectionPressure)), pool.get(i));
+			l.add(linearInterpolate(average, fitnesses.get(i), selectionPressure), new SimpleEntry<DNA, Double>(pool.get(i).getKey(), fitnesses.get(i)));
 		}
 		
 		for (int i = 0; i < pool.size()*(generationRefreshFactor-1)/generationRefreshFactor; i++) {
@@ -152,7 +163,7 @@ public class Population {
 		
 		for (int i = 0; i < poolSize; i++) {
 			
-			pool.add(new SimpleEntry<DNA, Double>(type.randomClone(), 0));
+			pool.add(new SimpleEntry<DNA, Double>(type.randomClone(), 0D));
 			
 		}
 		
