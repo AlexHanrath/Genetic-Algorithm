@@ -96,7 +96,7 @@ public class Population {
 		List<Double> fitnesses = getFitness.apply(new ArrayList<DNA>(pool));
 		List<DNA> newPool = new ArrayList<DNA>();
 		
-		WeightedSelectionList l = new WeightedSelctionList();
+		WeightedSelectionList<DNA> l = new WeightedSelctionList<DNA>();
 		for (int i = 0; i < pool.size(); i++) {
 			l.add(fitness.get(i), pool.get(i));
 		}
