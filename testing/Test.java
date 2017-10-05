@@ -31,7 +31,7 @@ public class Test {
 		public void update() {}
 		@Override
 		public DNA clone() {
-			TextDNA copy = new TextDNA(genes.length, min, max, step);
+			TextDNA copy = new TextDNA(genes.length, min, max);
 			copy.genes = new double[genes.length];
 			System.arraycopy(genes, 0, copy.genes, 0, genes.length);
 			return copy;
