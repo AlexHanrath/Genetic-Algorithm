@@ -28,13 +28,13 @@ public class Population {
 	private List<DNA> pool = new ArrayList<DNA>();
 	
 	private Consumer<List<DNA>> onUpdate;
-	private Function<List<DNA>, List<Double> getFitness;
+	private Function<List<DNA>, List<Double>> getFitness;
 	
 	private double mutationRate = 0.01;
 	private double selectionPressure = 1;
 	private double generationRefreshFactor = 2;
 	
-	public Population(Function<List<DNA>, List<Double> getFitness, DNA type, int poolSize) {
+	public Population(Function<List<DNA>, List<Double>> getFitness, DNA type, int poolSize) {
 		
 		this.type = type;
 		this.getFitness = getFitness;
