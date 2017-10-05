@@ -2,7 +2,6 @@ package testing;
 
 import java.util.function.Function;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import simulation.*;
