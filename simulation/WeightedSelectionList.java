@@ -33,7 +33,7 @@ public class WeightedSelectionList<T> {
 		double v = Math.random()*total;
 		T sel = null;
 		
-		for (Entry<T, Double> entry : data.getEntries()) {
+		for (Entry<T, Double> entry : data.entrySet()) {
 			
 			v -= entry.getValue();
 			
