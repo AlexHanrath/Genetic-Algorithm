@@ -26,7 +26,7 @@ public class Test {
 		public DNA clone() {
 			TextDNA copy = new TextDNA(genes.length, min, max, step);
 			copy.genes = new double[genes.length];
-			System.arraycopy(genes, 0, genes.length, copy.genes, 0);
+			System.arraycopy(genes, 0, copy.genes, 0, genes.length);
 			return copy;
 		}
 		
