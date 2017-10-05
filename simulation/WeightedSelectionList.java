@@ -1,6 +1,7 @@
 package simulation;
 
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.HashMap;
 
 public class WeightedSelectionList<T> {
