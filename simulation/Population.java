@@ -113,7 +113,7 @@ public class Population {
 		List<Double> fitnesses = getFitness.apply(new ArrayList<DNA>(pool));
 		List<DNA> newPool = new ArrayList<DNA>();
 		
-		double average = fitnesses.parallelStream().mapToDouble(v -> v).average().get();
+		double average = fitnesses.parallelStream().mapToDouble(v -> v).average().getAsDouble();
 		
 		WeightedSelectionList<DNA> l = new WeightedSelectionList<DNA>();
 		for (int i = 0; i < pool.size(); i++) {
