@@ -1,6 +1,6 @@
 package simulation;
 
-public class DNA implements Cloneable {
+public abstract class DNA implements Cloneable {
 	
 	private double[] genes;
 	private double min;
