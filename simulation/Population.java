@@ -113,7 +113,7 @@ public class Population {
 		
 		WeightedSelectionList<DNA> l = new WeightedSelctionList<DNA>();
 		for (int i = 0; i < pool.size(); i++) {
-			l.add(interpolate(average, fitnesses.get(i), selectionPressure), pool.get(i));
+			l.add(linearInterpolate(average, fitnesses.get(i), selectionPressure), pool.get(i));
 		}
 		
 		for (int i = 0; i < pool.size()*(generationRefreshFactor-1)/generationRefreshFactor; i++) {
