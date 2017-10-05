@@ -11,7 +11,7 @@ public class Test {
 	
 	public static class TextDNA extends DNA {
 		
-		public static Function<List<DNA>, List<Double>> getFitness = dnas -> dnas.parallelStream().map(dna -> dna.countMatch(target)).collect(Collectors.toList());
+		public static Function<List<DNA>, List<Double>> getFitness = dnas -> dnas.parallelStream().map(dna -> ((TextDNA) dna).countMatch(target)).collect(Collectors.toList());
 		
 		public double countMatch(String target) {
 			double count = 0;
