@@ -91,18 +91,21 @@ public class Population {
 		
 	}
 	
-	private void select() {
+	private void select() { //TODO selectionPressure
 		
 		List<Double> fitnesses = getFitness.apply(new ArrayList<DNA>(pool));
-			
+		List<DNA> newPool = new ArrayList<DNA>();
+		
 		WeightedSelectionList l = new WeightedSelctionList();
 		for (int i = 0; i < pool.size(); i++) {
 			l.add(fitness.get(i), pool.get(i));
 		}
 		
-		for (int i = 0; i < generationRefreshFactor; i++) {
-			pool.remove(l.removeRandom());
+		for (int i = 0; i < pool.size()*(generationRefreshFactor-1)/generationRefreshFactor; i++) {
+			newPool.add(l.removeRandom());
 		}
+		
+		pool.retainAll(newPool);
 		
 	}
 	
