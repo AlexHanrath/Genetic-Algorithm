@@ -64,8 +64,8 @@ public class Test {
 			List<DNA> pool = p.getPool();
 			List<Double> fitnesses = TextDNA.getFitness.apply(pool);
 			int index = 0;
-			for (int i = 0; i < fitnesses.size(); i++) {
-				index = (fitnesses.get(i) > fitnesses.get(index)) ? i : index;
+			for (int j = 0; j < fitnesses.size(); j++) {
+				index = (fitnesses.get(j) > fitnesses.get(index)) ? j : index;
 			}
 			System.out.println(pool.get(index).toString());
 		}
