@@ -24,7 +24,7 @@ public class Population {
 	}
 	
 	private DNA type;
-	private List<DNA> pool = new ArrayList<DNA>();
+	private List<Entry<DNA, Double>> pool = new ArrayList<Entry<DNA, Double>>();
 	
 	public List<DNA> getPool() {
 		return new ArrayList<DNA>(pool);
@@ -106,6 +106,24 @@ public class Population {
 		
 	}
 	
+	public DNA getBest() {
+		
+		
+		
+	}
+	
+	public DNA getWorst() {
+		
+		
+		
+	}
+	
+	public DNA getMean() {
+		
+		
+		
+	}
+	
 	private void select() {
 		
 		if (pool.size() == 0) {
@@ -113,13 +131,13 @@ public class Population {
 		}
 		
 		List<Double> fitnesses = getFitness.apply(new ArrayList<DNA>(pool));
-		List<DNA> newPool = new ArrayList<DNA>();
+		List<Entry<DNA, Double>> newPool = new ArrayList<Entry<DNA, Double>>();
 		
 		double average = fitnesses.parallelStream().mapToDouble(v -> v).average().getAsDouble();
 		
-		WeightedSelectionList<DNA> l = new WeightedSelectionList<DNA>();
+		WeightedSelectionList<Entry<DNA, Double>> l = new WeightedSelectionList<Entry<DNA, Double>>();
 		for (int i = 0; i < pool.size(); i++) {
-			l.add(linearInterpolate(average, fitnesses.get(i), selectionPressure), pool.get(i));
+			l.add(new SimpleEntry<DNA, Double>(pool.get(i), linearInterpolate(average, fitnesses.get(i), selectionPressure)), pool.get(i));
 		}
 		
 		for (int i = 0; i < pool.size()*(generationRefreshFactor-1)/generationRefreshFactor; i++) {
@@ -134,7 +152,7 @@ public class Population {
 		
 		for (int i = 0; i < poolSize; i++) {
 			
-			pool.add(type.randomClone());
+			pool.add(new SimpleEntry<DNA, Double>(type.randomClone(), 0));
 			
 		}
 		
@@ -142,14 +160,14 @@ public class Population {
 	
 	private void createChildren() {
 		
-		List<DNA> children = new ArrayList<DNA>();
-		for (DNA parent : pool) {
+		List<Entry<DNA, Double>> children = new ArrayList<Entry<DNA, Double>>();
+		for (Entry<DNA, Double> parent : pool) {
 			for (int i = 0; i < generationRefreshFactor; i++) {
-				DNA child = parent.clone();
+				DNA child = parent.getKey().clone();
 				if (Math.random() < mutationRate) {
 					child.mutate();
 				}
-				children.add(child);
+				children.add(new SimpleEntry<DNA, Double>(child, parent.getValue()));
 			}
 		}
 		
