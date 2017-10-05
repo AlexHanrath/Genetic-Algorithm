@@ -52,17 +52,22 @@ public class Test {
 	public static final String target = "hello world";
 	public static final int size = 100;
 	public static final int nGenerations = 1000;
+	public static final int outputInterval = 10;
 	
 	public static void main(String[] args) {
     		
-		TextDNA template = new TextDNA(11, 0, 26);
+		TextDNA template = new TextDNA(target.length(), 0, charMap.length+1);
     		Population p = new Population(TextDNA.getFitness, template, size);
-		p.doGenerations(nGenerations);
 		
-		List<DNA> pool = p.getPool();
-		
-		for (DNA dna : pool) {
-			System.out.println(((TextDNA) dna).toString());
+		for (int i = 0; i < nGenerations; i += outputInterval) {
+			p.doGenerations(nGenerations);
+			List<DNA> pool = p.getPool();
+			List<Double> fitnesses = TextDNA.getFitness.apply(pool);
+			int index = 0;
+			for (int i = 0; i < fitnesses.size(); i++) {
+				index = (fitnesses.get(i) > fitnesses.get(index)) ? i : index;
+			}
+			System.out.println(pool.get(index).toString());
 		}
     		
 	}
