@@ -104,7 +104,7 @@ public class Population {
 		
 	}
 	
-	private void select() { //TODO selectionPressure
+	private void select() {
 		
 		List<Double> fitnesses = getFitness.apply(new ArrayList<DNA>(pool));
 		List<DNA> newPool = new ArrayList<DNA>();
