@@ -30,8 +30,8 @@ public class Population {
 	private Consumer<List<DNA>> onUpdate;
 	private Function<List<DNA>, List<Double> getFitness;
 	
-	private double mutationChange = 0.01;
-	private double selectionPressure = 0.01;
+	private double mutationRate = 0.01;
+	private double selectionPressure = 1;
 	private double generationRefreshFactor = 2;
 	
 	public Population(Function<List<DNA>, List<Double> getFitness, DNA type, int poolSize) {
@@ -43,19 +43,19 @@ public class Population {
 		
 	}
 	
-	public void setMutationChance(double newValue) {
-		mutationChange = newValue;	
+	public void setMutationRate(double newValue) {
+		mutationRate = newValue;	
 	}
 	
-	public double getMutationChance(double newValue) {
-		return mutationChange;
+	public double getMutationRate() {
+		return mutationRate;
 	}
 	
 	public void setSelectionPressure(double newValue) {
 		selectionPressure = newValue;	
 	}
 	
-	public double getSelectionPressure(double newValue) {
+	public double getSelectionPressure() {
 		return selectionPressure;	
 	}
 	
@@ -109,9 +109,11 @@ public class Population {
 		List<Double> fitnesses = getFitness.apply(new ArrayList<DNA>(pool));
 		List<DNA> newPool = new ArrayList<DNA>();
 		
+		double average = fitnesses.parallelStream().mapToDouble(v -> v).average();
+		
 		WeightedSelectionList<DNA> l = new WeightedSelctionList<DNA>();
 		for (int i = 0; i < pool.size(); i++) {
-			l.add(fitness.get(i), pool.get(i));
+			l.add(interpolate(average, fitnesses.get(i), selectionPressure), pool.get(i));
 		}
 		
 		for (int i = 0; i < pool.size()*(generationRefreshFactor-1)/generationRefreshFactor; i++) {
