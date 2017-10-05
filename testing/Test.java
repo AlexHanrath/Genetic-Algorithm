@@ -4,6 +4,8 @@ import java.util.function.Function;
 import java.util.List;
 import java.util.ArrayList;
 
+import simulation.*;
+
 public class Test {
 	
 	public static class TextDNA extends DNA {
