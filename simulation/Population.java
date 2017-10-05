@@ -106,12 +106,16 @@ public class Population {
 	
 	private void select() {
 		
+		if (pool.size() == 0) {
+			return;
+		}
+		
 		List<Double> fitnesses = getFitness.apply(new ArrayList<DNA>(pool));
 		List<DNA> newPool = new ArrayList<DNA>();
 		
-		double average = fitnesses.parallelStream().mapToDouble(v -> v).average();
+		double average = fitnesses.parallelStream().mapToDouble(v -> v).average().get();
 		
-		WeightedSelectionList<DNA> l = new WeightedSelctionList<DNA>();
+		WeightedSelectionList<DNA> l = new WeightedSelectionList<DNA>();
 		for (int i = 0; i < pool.size(); i++) {
 			l.add(linearInterpolate(average, fitnesses.get(i), selectionPressure), pool.get(i));
 		}
@@ -126,7 +130,7 @@ public class Population {
 	
 	private void initPool(int poolSize) {
 		
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < poolSize; i++) {
 			
 			pool.add(type.randomClone());
 			
