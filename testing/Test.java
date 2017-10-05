@@ -19,6 +19,10 @@ public class Test {
 					count++;
 				}
 			}
+			if (count == genes.length) {
+				System.out.println(toString());
+				System.exit(-1);
+			}
 			return count;
 		}
 		
