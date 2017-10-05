@@ -12,7 +12,7 @@ public class WeightedSelectionList<T> {
 		
 		remove(elem);
 		
-		data.put(weight, elem);
+		data.put(elem, weight);
 		total += weight;
 		
 	}
