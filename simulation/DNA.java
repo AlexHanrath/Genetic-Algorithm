@@ -2,10 +2,10 @@ package simulation;
 
 public abstract class DNA {
 	
-	private double[] genes;
-	private double min;
-	private double max;
-	private double step = 1;
+	protected double[] genes;
+	protected double min;
+	protected double max;
+	protected double step = 1;
 	
 	public abstract void update();
 	public abstract DNA clone();
@@ -38,8 +38,9 @@ public abstract class DNA {
 		copy.step = step;
 	}
 	
-	public DNA(int nGenes, double min, double max) {
+	public DNA(int nGenes, double min, double max, double step) {
 		
+		this.step = step;
 		this.min = min;
 		this.max = max;
 		genes = new double[nGenes];
