@@ -155,7 +155,8 @@ public class Population {
 			newPool.add(l.removeRandom());
 		}
 		
-		pool.retainAll(newPool);
+		pool.clear();
+		pool.addAll(newPool);
 		
 	}
 	
