@@ -13,7 +13,7 @@ public class Test {
 		public static Function<List<DNA>, List<Double>> getFitness = dnas -> dnas.parallelStream().map(dna -> {
 			double count = 0;
 			for (int i = 0; i < dna.genes.length; i++) {
-				if (charMap[(int) dna.genes[i]].equals(target.charAt(i))) {
+				if (charMap[(int) dna.genes[i]] == target.charAt(i)) {
 					count++;
 				}
 			}
