@@ -24,7 +24,7 @@ public abstract class DNA implements Cloneable {
 	
 	public DNA randomClone() {
 		DNA copy = clone();
-		for (int i = 0; i < genes.length) {
+		for (int i = 0; i < genes.length; i++) {
 			mutateGene(i);
 		}
 		return copy;
