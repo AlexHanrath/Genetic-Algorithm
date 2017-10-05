@@ -2,9 +2,10 @@ package simulation;
 
 public class DNA implements Cloneable {
 	
-	private int[] genes;
-	private int min;
-	private int max;
+	private double[] genes;
+	private double min;
+	private double max;
+	private double step = 1;
 	
 	public abstract void update();
 	
@@ -17,7 +18,7 @@ public class DNA implements Cloneable {
 	
 	private void mutateGene(int index) {
 		
-		genes[index] = Math.round(Math.random()*(max-min))+min;
+		genes[index] = Math.round(Math.random()*(max-min)/step)*step+min;
 		
 	}
 	
@@ -35,14 +36,15 @@ public class DNA implements Cloneable {
 		copy.genes = genes;
 		copy.min = min;
 		copy.max = max;
+		copy.step = step;
 		return copy;
 	}
 	
-	public DNA(int nGenes, int min, int max) {
+	public DNA(int nGenes, double min, double max) {
 		
 		this.min = min;
 		this.max = max;
-		genes = new int[nGenes];
+		genes = new double[nGenes];
 			
 	}
 	
