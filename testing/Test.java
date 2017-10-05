@@ -56,7 +56,7 @@ public class Test {
 	
 	public static void main(String[] args) {
     		
-		TextDNA template = new TextDNA(target.length(), 0, charMap.length+1);
+		TextDNA template = new TextDNA(target.length(), 0, charMap.length-1);
     		Population p = new Population(TextDNA.getFitness, template, size);
 		
 		for (int i = 0; i < nGenerations; i += outputInterval) {
