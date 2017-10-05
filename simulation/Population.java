@@ -95,10 +95,13 @@ public class Population {
 		
 		List<Double> fitnesses = getFitness.apply(new ArrayList<DNA>(pool));
 			
-		//TODO create weighted pool where selectionPressure is fuzzyness
+		WeightedSelectionList l = new WeightedSelctionList();
+		for (int i = 0; i < pool.size(); i++) {
+			l.add(fitness.get(i), pool.get(i));
+		}
 		
 		for (int i = 0; i < generationRefreshFactor; i++) {
-			//TODO remove random child from the list
+			pool.remove(l.removeRandom());
 		}
 		
 	}
