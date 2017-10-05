@@ -64,13 +64,7 @@ public class Test {
 		
 		for (int i = 0; i < nGenerations; i += outputInterval) {
 			p.doGenerations(nGenerations);
-			List<DNA> pool = p.getPool();
-			List<Double> fitnesses = TextDNA.getFitness.apply(pool);
-			int index = 0;
-			for (int j = 0; j < fitnesses.size(); j++) {
-				index = (fitnesses.get(j) > fitnesses.get(index)) ? j : index;
-			}
-			System.out.println(pool.get(index).toString());
+			System.out.println(p.getBest().toString());
 		}
     		
 	}
