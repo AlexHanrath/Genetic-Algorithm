@@ -63,7 +63,7 @@ public class Test {
     		Population p = new Population(TextDNA.getFitness, template, size);
 		
 		for (int i = 0; i < nGenerations; i += outputInterval) {
-			p.doGenerations(nGenerations);
+			p.doGenerations(outputInterval);
 			System.out.println(p.getBest().toString());
 		}
     		
